@@ -14,3 +14,16 @@ function* fibonacci() {
     }
 }
 
+function* evenFibonacci() {
+    for (const f of fibonacci()) {
+        if (f % 2 === 0) {
+            yield f;
+        }
+    }
+}
+
+myFibs = evenFibonacci()
+let count = 6;
+while (count --> 0) {
+    console.log(myFibs.next().value)
+}
