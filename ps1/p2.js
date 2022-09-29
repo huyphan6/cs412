@@ -2,19 +2,19 @@ const operator = str => {
     const arr = str.split("")
     switch(arr[1]) {
         case "+":
-            return Number(arr[0]) + Number(arr[2])
+            return Number(arr[0]) + Number(arr[2]);
             break;
         case "-":
-            return Number(arr[0]) - Number(arr[2])
+            return Number(arr[0]) - Number(arr[2]);
             break;
         case "/":
-            return Number(arr[0]) / Number(arr[2])
+            return Number(arr[0]) / Number(arr[2]);
             break;
         case "*":
-            return Number(arr[0]) * Number(arr[2])
+            return Number(arr[0]) * Number(arr[2]);
             break;
         case "^":
-            return Number(arr[0]) ** Number(arr[2])
+            return Number(arr[0]) ** Number(arr[2]);
             break;
         case "%":
             const a = Number(arr[0])
