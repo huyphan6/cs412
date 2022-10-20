@@ -14,10 +14,6 @@ router.post('/postString', function(req, res, next) {
     res.render('postString', { title:'part c', res: req.body });
 })
 
-router.get('/postString', function(req, res, next) {
-    res.render('postString', { title:'part c', res: req.body });
-});
-
 router.get('/data/:name', function(req, res, next) {
     res.render('data', { title: 'part d', name: req.params.name });
 });
