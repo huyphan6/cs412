@@ -6,7 +6,7 @@ const router = express.Router();
 require('dotenv').config();
 const token = process.env.WEATHER_TOKEN;
 const boston_weather = process.env.BOSTON_WEATHER_URL;
-const base_url = process.env.BASE_URL;
+const base_url = process.env.BASE_WEATHER_URL;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -60,7 +60,7 @@ router.get('/weather-result', async function (req, res, next) {
     const response = await fetch(boston_weather)
     const data = await response.json()
 
-    res.render('ps4', {title: 'PS4', data: JSON.stringify(data, null, 2)});
+    res.render('ps4', {title: 'Weather Forecast Rendered In Front End', data: JSON.stringify(data, null, 2)});
 })
 
 /* Part F - An HTML form to send a search string into your route */
@@ -71,13 +71,13 @@ router.get('/search', function (req, res, next) {
 
 router.post('/weather-form', async function (req, res, next) {
     const coordinate = req.body.search;
-    const url = "https://api.weatherusa.net/v1/forecast?q=" + coordinate;
+    const url = base_url + coordinate;
     console.log(url)
 
     let wx = await fetch(url)
     let data = await wx.json()
     // res.send(data)
-    res.render('ps4', {title: 'PS4', data: data[0].wspd});
+    res.render('ps4', {title: 'Wind Speed', data: data[0].wspd});
 })
 
 
