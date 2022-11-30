@@ -1,0 +1,20 @@
+doctype html
+html
+    head
+        title= title
+    body
+        block content
+            h1= title
+
+            label Search for a city's weather forecast here via coordinates:
+            br
+            br
+            input#search(type='text' placeholder='42.36,71.05')
+            br
+            br
+            button(onclick='search()') Search
+
+            p
+
+            h2 Results from weather api call
+            p= data
