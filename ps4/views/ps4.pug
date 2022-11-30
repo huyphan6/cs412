@@ -9,10 +9,11 @@ html
             label Search for a city's weather forecast here via coordinates:
             br
             br
-            input#search(type='text' placeholder='42.36,71.05')
-            br
-            br
-            button(onclick='search()') Search
+            form(action="http://localhost:3000/ps4/weather-form" method="post")
+                input#search(type='text' name='search' placeholder='42.36,71.05')
+                br
+                br
+                button(type="submit") Search
 
             p
 

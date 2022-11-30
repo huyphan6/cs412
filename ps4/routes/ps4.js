@@ -23,7 +23,7 @@ const options = {
     }
 };
 
-router.post('/weather', function (req, res, next) {
+router.get('/weather', function (req, res, next) {
     return new Promise((resolve, reject) => {
         request(options, function (error, response) {
             if (error) throw new Error(error);
@@ -39,14 +39,14 @@ router.post('/weather', function (req, res, next) {
 })
 
 /* Part C - uses async/await + node-fetch to get weather forecast */
-router.post('/weather-fetch', async function (req, res, next) {
+router.get('/weather-fetch', async function (req, res, next) {
     const response = await fetch(boston_weather)
     const data = await response.json()
     res.send(data)
 })
 
 /* Part D - uses request and a callback to get weather forecast */
-router.post('/weather-callback', function (req, res, next) {
+router.get('/weather-callback', function (req, res, next) {
     request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(JSON.parse(response.body));
@@ -64,20 +64,20 @@ router.get('/weather-result', async function (req, res, next) {
 })
 
 /* Part F - An HTML form to send a search string into your route */
-const search = async () => {
-    const coord = document.getElementById('search').value;
-    console.log(coord)
-    const url = base_url + coord;
+
+router.get('/search', function (req, res, next) {
+    res.render('ps4', {title: 'Search'});
+})
+
+router.post('/weather-form', async function (req, res, next) {
+    const coordinate = req.body.search;
+    const url = "https://api.weatherusa.net/v1/forecast?q=" + coordinate;
     console.log(url)
 
-    const response = await fetch(url)
-    return await response.json();
-}
-
-router.get('/weather-form', function (req, res, next) {
-    const result = search()
-
-    res.render('ps4', {title: 'PS4', form: JSON.stringify(result)});
+    let wx = await fetch(url)
+    let data = await wx.json()
+    // res.send(data)
+    res.render('ps4', {title: 'PS4', data: data[0].wspd});
 })
 
 
